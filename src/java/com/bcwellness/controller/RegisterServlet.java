@@ -22,7 +22,7 @@ import com.bcwellness.dao.UserDAO;
  * @author USER-PC
  */
 @WebServlet("/register")
-public class RegisterServelet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
