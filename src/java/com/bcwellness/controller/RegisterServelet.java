@@ -22,8 +22,17 @@ import com.bcwellness.dao.UserDAO;
  * @author USER-PC
  */
 @WebServlet("/register")
-public class RegisterServlet extends HttpServlet {
+public class RegisterServelet extends HttpServlet {
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -84,7 +93,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 
     // Respond
     if (success) {
-        response.sendRedirect("dashboard.jsp"); // Go to login page
+        response.sendRedirect("login.jsp"); // Go to login page
     } else {
         // Registration failed – likely user already exists
         response.setContentType("text/html");
