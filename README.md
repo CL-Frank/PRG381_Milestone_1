@@ -32,8 +32,8 @@ CREATE TABLE students (
 ```
 ### 4. Db Config
 In the DBConfig file, change the following to mathc your databse credentials:
-```bash
-private static final String URL = "jdbc:postgresql://localhost:5432/bc_wellness_db";
+```java
+private static final String URL = "jdbc:postgresql://localhost:5432/"db_name";
 private static final String USER = "your_postgres_username";
 private static final String PASSWORD = "your_password";
 ```
