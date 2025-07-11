@@ -45,4 +45,75 @@ public class UserDAO {
             return false;
         }
     }
+    /**
+     * Authenticates a user with email and password
+     * @param email User's email
+     * @param password User's password
+     * @return User object if authentication successful, null otherwise
+     */
+    public User authenticateUser(String email, String password) {
+        try (Connection conn = DBConfig.getConnection()) {
+            String sql = "SELECT student_number, name, surname, email, phone, password FROM Students WHERE email = ? AND password = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, email);
+            stmt.setString(2, password);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // User found - create User object
+                User user = new User(
+                        rs.getString("student_number"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getString("password")
+                );
+                return user;
+            } else {
+                // User not found or wrong credentials
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Alternative authentication method using student number
+     * @param studentNumber Student's student number
+     * @param password User's password
+     * @return User object if authentication successful, null otherwise
+     */
+    public User authenticateUserByStudentNumber(String studentNumber, String password) {
+        try (Connection conn = DBConfig.getConnection()) {
+            String sql = "SELECT student_number, name, surname, email, phone, password FROM Students WHERE student_number = ? AND password = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, studentNumber);
+            stmt.setString(2, password);
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                // User found - create User object
+                User user = new User(
+                        rs.getString("student_number"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getString("password")
+                );
+                return user;
+            } else {
+                // User not found or wrong credentials
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

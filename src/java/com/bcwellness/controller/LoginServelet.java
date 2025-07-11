@@ -1,10 +1,8 @@
 package com.bcwellness.controller;
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,10 +10,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import com.bcwellness.model.User;
+import com.bcwellness.dao.UserDAO;
 
-
+/**
+ *
+ * @author USER-PC
+ */
 @WebServlet("/login")
-public class LoginServelet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +38,10 @@ public class LoginServelet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServelet</title>");
+            out.println("<title>Servlet LoginServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServelet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,7 +73,42 @@ public class LoginServelet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
+        // Get login credentials from form
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        // Validate input
+        if (email == null || email.trim().isEmpty() ||
+                password == null || password.trim().isEmpty()) {
+
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            out.println("<h3>Error: Please fill in all fields.</h3>");
+            out.println("<a href='login.jsp'>Go back</a>");
+            return;
+        }
+
+        // Authenticate user via DAO
+        UserDAO dao = new UserDAO();
+        User user = dao.authenticateUser(email, password);
+
+        if (user != null) {
+            // Login successful - create session
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            session.setAttribute("studentName", user.getName());
+            session.setAttribute("studentNumber", user.getStudentNumber());
+
+            // Redirect to dashboard
+            response.sendRedirect("dashboard.jsp");
+        } else {
+            // Login failed
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            out.println("<h3>Login failed: Invalid email or password.</h3>");
+            out.println("<a href='login.jsp'>Try again</a>");
+        }
     }
 
     /**
@@ -79,7 +118,6 @@ public class LoginServelet extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Login servlet for BC Wellness Management System";
     }// </editor-fold>
-
 }
