@@ -33,17 +33,17 @@
             </div>
         </nav>
     </header>
-<div class="container mt-5">
+<div class="container mt-5 ">
     <div class="text-center">
         <h1 class="mb-4">Welcome to BC Student Wellness System</h1>
         <p class="lead mb-5">Manage your wellness through our online portal</p>
 
-        <div class="d-flex justify-content-center gap-3">
+<!--        <div class="d-flex justify-content-center gap-3">
             <a href="login.jsp" class="btn btn-primary btn-lg">Login</a>
             <a href="register.jsp" class="btn btn-outline-primary btn-lg">Register</a>
-            <!-- Temporary -->
+             Temporary 
             <a href="dashboard.jsp" class="btn btn-outline-primary btn-lg">Dashboard</a>
-        </div>
+        </div>-->
     </div>
 </div>
 <footer class="mt-5 py-3 bg-white shadow-sm">
