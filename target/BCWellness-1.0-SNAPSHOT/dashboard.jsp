@@ -1,5 +1,6 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page session = "true"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +10,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
+    <%
+        String name = (String) session.getAttribute("studentName");
+        if (name == null) {
+            response.sendRedirect("login.jsp");
+            return;
+        }
+    %>
 <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
             <div class="container">
@@ -39,7 +47,7 @@
     </header>
 <div class="container mt-5">
     <div class="text-center">
-        <h2 class="mb-4">Welcome, student </h2>
+        <h2 class="mb-4">Welcome, <%= name %> </h2>
         <p class="lead">You are now logged into the BC Student Wellness System.</p>
         <a href="logout" class="btn btn-danger mt-3">Logout</a>
     </div>

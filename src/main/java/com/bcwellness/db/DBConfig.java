@@ -7,8 +7,8 @@ import java.sql.SQLException;
 public class DBConfig {
     // Database connection details
     private static final String URL = "jdbc:postgresql://localhost:5432/StudentDB";
-    private static final String USER = "frank";
-    private static final String PASSWORD = "0618";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "frank";
 
     public static Connection getConnection() throws SQLException {
         try {

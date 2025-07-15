@@ -65,8 +65,10 @@ public class UserDAO {
      */
     public User authenticateUser(String email, String password) {
         String sql = "SELECT student_number, name, surname, email, phone, password FROM Students WHERE email = ?";
+        System.out.println("Checkin genami: " + email);
 
         try (Connection conn = DBConfig.getConnection();
+            
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, email);

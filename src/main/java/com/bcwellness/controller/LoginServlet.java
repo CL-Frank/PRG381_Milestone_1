@@ -2,6 +2,7 @@ package com.bcwellness.controller;
 
 import com.bcwellness.db.UserDAO;
 import com.bcwellness.model.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -12,7 +13,6 @@ import java.util.logging.Logger;
  * Login servlet for BC Wellness Management System
  * Handles user authentication and session management
  *
- * @author USER-PC
  */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
             User user = userDAO.authenticateUser(email, password);
 
             if (user != null) {
+
                 // Login successful - create session
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);

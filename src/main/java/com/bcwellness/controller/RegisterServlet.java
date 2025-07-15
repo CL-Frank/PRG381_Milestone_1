@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bcwellness.model.User;
 import com.bcwellness.db.UserDAO;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -74,6 +75,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
     String email = request.getParameter("email");
     String phone = request.getParameter("phone");
     String password = request.getParameter("password");
+        
 
     // Create User object
     User user = new User(studentNumber, name, surname, email, phone, password);
@@ -84,7 +86,11 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response)
 
     // Respond
     if (success) {
-        response.sendRedirect("dashboard.jsp"); // Go to login page
+        // ✅ Auto-login: create session and redirect to dashboard
+        HttpSession session = request.getSession();
+        session.setAttribute("user", user);
+        session.setAttribute("studentName", user.getName());
+        response.sendRedirect("dashboard.jsp");
     } else {
         // Registration failed – likely user already exists
         response.setContentType("text/html");
