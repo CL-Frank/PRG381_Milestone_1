@@ -1,0 +1,8 @@
+com\bcwellness\db\DBConfig.class
+com\bcwellness\db\DBTest.class
+com\bcwellness\db\UserDAO.class
+com\bcwellness\bcwellness_m\JakartaRestConfiguration.class
+com\bcwellness\model\User.class
+com\bcwellness\controller\RegisterServlet.class
+com\bcwellness\bcwellness_m\resources\JakartaEE8Resource.class
+com\bcwellness\controller\LoginServlet.class
