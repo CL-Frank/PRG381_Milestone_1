@@ -1,4 +1,11 @@
-# BCWellness
+# BCWellness Web
+PRG381 Project Milestone 1
+## Project Members
+
+- **Caydan Frank 578131**  
+- **Vunene Khoza 600676**   
+- **Yanga Mazibuko 600459**
+
 ## Setup Instructions
 
 ### 1. Prerequisites
