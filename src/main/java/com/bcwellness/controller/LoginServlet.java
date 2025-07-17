@@ -61,6 +61,7 @@ public class LoginServlet extends HttpServlet {
                 // Login failed
                 logger.warning("Login failed for user: " + email);
                 request.setAttribute("error", "Invalid email or password.");
+                request.setAttribute("email", email);
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             }
 
