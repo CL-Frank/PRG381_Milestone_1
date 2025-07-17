@@ -6,6 +6,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UserDAO {
@@ -55,7 +56,7 @@ public class UserDAO {
 
             return stmt.executeUpdate() > 0;
         } catch (Exception e) {
-            logger.severe("Error registering user: " + e.getMessage());
+            logger.log(Level.SEVERE, "Error registering user: {0}", e.getMessage());
             return false;
         }
     }
@@ -65,7 +66,6 @@ public class UserDAO {
      */
     public User authenticateUser(String email, String password) {
         String sql = "SELECT student_number, name, surname, email, phone, password FROM Students WHERE email = ?";
-        System.out.println("Checkin genami: " + email);
 
         try (Connection conn = DBConfig.getConnection();
             
